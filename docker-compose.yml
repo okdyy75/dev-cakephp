@@ -1,0 +1,28 @@
+version: "3"
+services:
+  web:
+    build:
+      context: ./docker/web
+      dockerfile: Dockerfile
+    expose:
+      - "80"
+    depends_on:
+      - db
+    volumes:
+      - "./www:/var/www"
+    ports:
+      - "80:80"
+  db:
+    build:
+      context: ./docker/db
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_DATABASE: cakephp
+      MYSQL_ROOT_PASSWORD: root
+      TZ: Asia/Tokyo
+    expose:
+      - "3306"
+    volumes:
+      - "./.data/db/var/lib/mysql:/var/lib/mysql"
+    ports:
+      - "3306:3306"
