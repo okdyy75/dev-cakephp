@@ -19,6 +19,9 @@ RUN apt-get update && \
 
 RUN docker-php-ext-install intl pdo_mysql
 
+# xdebug
+RUN pecl install xdebug
+
 COPY --from=composer2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/cakephp
