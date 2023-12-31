@@ -36,9 +36,7 @@ class UserFactory extends CakephpBaseFactory
     {
         $this->setDefaultData(function (Generator $faker) {
             return [
-                // set the model's default values
-                // For example:
-                // 'name' => $faker->lastName
+                'name' => $faker->lastName
             ];
         });
     }
