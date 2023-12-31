@@ -1,6 +1,9 @@
 <?php
 declare(strict_types=1);
 
+use Cake\Datasource\ConnectionManager;
+use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
 use Migrations\AbstractSeed;
 
 /**
@@ -20,9 +23,18 @@ class UsersSeed extends AbstractSeed
      */
     public function run(): void
     {
-        $data = [];
+        $data = [
+            [
+                'id' => 1,
+                'name' => 'user1',
+            ],
+        ];
 
-        $table = $this->table('users');
-        $table->insert($data)->save();
+        $usersTable = TableRegistry::getTableLocator()->get('Users');
+        $usersTable->getConnection()->transactional(function () use ($usersTable, $data) {
+            $users = $usersTable->find()->all();
+            $entities = $usersTable->patchEntities($users, $data);
+            $usersTable->saveManyOrFail($entities);
+        });
     }
 }
