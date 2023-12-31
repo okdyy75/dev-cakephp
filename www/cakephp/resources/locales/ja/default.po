@@ -17,117 +17,116 @@ msgstr ""
 #: ./src/Controller/UsersController.php:53
 #: ./src/Controller/UsersController.php:77
 msgid "The user has been saved."
-msgstr ""
+msgstr "ユーザーが保存されました。"
 
 #: ./src/Controller/UsersController.php:57
 #: ./src/Controller/UsersController.php:81
 msgid "The user could not be saved. Please, try again."
-msgstr ""
+msgstr "ユーザーを保存できませんでした。もう一度試してください。"
 
 #: ./src/Controller/UsersController.php:98
 msgid "The user has been deleted."
-msgstr ""
+msgstr "ユーザーが削除されました。"
 
 #: ./src/Controller/UsersController.php:100
 msgid "The user could not be deleted. Please, try again."
-msgstr ""
+msgstr "ユーザーを削除できませんでした。もう一度試してください。"
 
 #: ./templates/Users/add.php:10
 #: ./templates/Users/edit.php:10
 #: ./templates/Users/index.php:18
 #: ./templates/Users/view.php:10
 msgid "Actions"
-msgstr ""
+msgstr "アクション"
 
 #: ./templates/Users/add.php:11
 #: ./templates/Users/edit.php:16
 #: ./templates/Users/view.php:13
 msgid "List Users"
-msgstr ""
+msgstr "ユーザー一覧"
 
 #: ./templates/Users/add.php:18
 msgid "Add User"
-msgstr ""
+msgstr "ユーザーを追加"
 
 #: ./templates/Users/add.php:23
 #: ./templates/Users/edit.php:28
 msgid "Submit"
-msgstr ""
+msgstr "送信"
 
 #: ./templates/Users/edit.php:12
 #: ./templates/Users/index.php:31
 msgid "Delete"
-msgstr ""
+msgstr "削除"
 
 #: ./templates/Users/edit.php:14
 #: ./templates/Users/index.php:31
 #: ./templates/Users/view.php:12
 msgid "Are you sure you want to delete # {0}?"
-msgstr ""
+msgstr "# {0} を削除してもよろしいですか？"
 
 #: ./templates/Users/edit.php:23
 #: ./templates/Users/view.php:11
 msgid "Edit User"
-msgstr ""
+msgstr "ユーザーを編集"
 
 #: ./templates/Users/index.php:8
 #: ./templates/Users/view.php:14
 msgid "New User"
-msgstr ""
+msgstr "新規ユーザー"
 
 #: ./templates/Users/index.php:9
 msgid "Users"
-msgstr ""
+msgstr "ユーザー"
 
 #: ./templates/Users/index.php:29
 msgid "View"
-msgstr ""
+msgstr "表示"
 
 #: ./templates/Users/index.php:30
 msgid "Edit"
-msgstr ""
+msgstr "編集"
 
 #: ./templates/Users/index.php:40
 msgid "first"
-msgstr ""
+msgstr "最初"
 
 #: ./templates/Users/index.php:41
 msgid "previous"
-msgstr ""
+msgstr "前へ"
 
 #: ./templates/Users/index.php:43
 msgid "next"
-msgstr ""
+msgstr "次へ"
 
 #: ./templates/Users/index.php:44
 msgid "last"
-msgstr ""
+msgstr "最後"
 
 #: ./templates/Users/index.php:46
 msgid "Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total"
-msgstr ""
+msgstr "ページ {{page}} / {{pages}}、{{count}} 件中 {{current}} 件目を表示しています"
 
 #: ./templates/Users/view.php:12
 msgid "Delete User"
-msgstr ""
+msgstr "ユーザーを削除"
 
 #: ./templates/Users/view.php:22
 msgid "Name"
-msgstr ""
+msgstr "名前"
 
 #: ./templates/Users/view.php:26
 msgid "Id"
-msgstr ""
+msgstr "ID"
 
 #: ./templates/Users/view.php:30
 msgid "Created"
-msgstr ""
+msgstr "作成日時"
 
 #: ./templates/Users/view.php:34
 msgid "Modified"
-msgstr ""
+msgstr "変更日時"
 
 #: ./templates/layout/error.php:38
 msgid "Back"
-msgstr ""
-
+msgstr "戻る"
