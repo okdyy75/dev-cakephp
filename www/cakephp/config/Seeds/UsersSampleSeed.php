@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use App\Test\Factory\UserFactory;
+use Cake\ORM\TableRegistry;
 use Migrations\AbstractSeed;
 
 /**
@@ -21,6 +22,18 @@ class UsersSampleSeed extends AbstractSeed
      */
     public function run(): void
     {
-        UserFactory::make([], 100)->persist();
+        $faker = Faker\Factory::create();
+        $data = [];
+        for ($i = 0; $i < 100; $i++) {
+            $data[] = [
+                'name' => $faker->lastName(),
+            ];
+        }
+
+        $usersTable = TableRegistry::getTableLocator()->get('Users');
+        $usersTable->getConnection()->transactional(function () use ($usersTable, $data) {
+            $entities = $usersTable->newEntities($data);
+            $usersTable->saveManyOrFail($entities);
+        });
     }
 }
