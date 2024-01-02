@@ -45,6 +45,16 @@ composer install
 
 # キャッシュ全クリア
 bin/cake cache clear_all
+
+# 翻訳ファイル（.po）の生成コマンド
+bin/cake i18n extract --paths /var/www/cakephp/src/,/var/www/cakephp/templates/ \
+    --output /var/www/cakephp/resources/locales/ \
+    --extract-core yes \
+    --overwrite
+
+# en・ja翻訳ファイル（.po）の生成コマンド
+bin/cake i18n init en
+bin/cake i18n init ja
 ```
 
 ### モデル・ファクトリー・シード作成
