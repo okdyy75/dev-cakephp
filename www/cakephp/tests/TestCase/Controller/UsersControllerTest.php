@@ -4,8 +4,11 @@ declare(strict_types=1);
 namespace App\Test\TestCase\Controller;
 
 use App\Controller\UsersController;
+use App\Model\Table\UsersTable;
+use App\Test\Factory\UserFactory;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
+use CakephpTestSuiteLight\Fixture\TruncateDirtyTables;
 
 /**
  * App\Controller\UsersController Test Case
@@ -15,15 +18,16 @@ use Cake\TestSuite\TestCase;
 class UsersControllerTest extends TestCase
 {
     use IntegrationTestTrait;
+    use TruncateDirtyTables;
 
-    /**
-     * Fixtures
-     *
-     * @var array<string>
-     */
-    protected $fixtures = [
-        'app.Users',
-    ];
+    private UsersTable $Users;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->Users = $this->getTableLocator()->get('Users');
+        $this->enableCsrfToken();
+    }
 
     /**
      * Test index method
@@ -33,7 +37,12 @@ class UsersControllerTest extends TestCase
      */
     public function testIndex(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $expectedCount = 5;
+        $user = UserFactory::make([], $expectedCount)->persist();
+        $this->get('/users');
+        $this->assertResponseOk();
+        $users = $this->viewVariable('users');
+        $this->assertCount($expectedCount, $user);
     }
 
     /**
@@ -44,7 +53,12 @@ class UsersControllerTest extends TestCase
      */
     public function testView(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $userName = 'テストユーザー';
+        $user = UserFactory::make(['name' => $userName])->persist();
+        $this->get('/users/view/' . $user->id);
+        $this->assertResponseOk();
+        $user =  $this->viewVariable('user');
+        $this->assertEquals($userName, $user->name);
     }
 
     /**
@@ -55,7 +69,17 @@ class UsersControllerTest extends TestCase
      */
     public function testAdd(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $userName = 'テストユーザー';
+        $data = [
+            'name' => $userName
+        ];
+        $this->enableCsrfToken();
+        $this->post('/users/add', $data);
+        $this->assertRedirect('/users');
+        $existsAddUser = $this->Users->exists([
+            'name' => $userName
+        ]);
+        $this->assertTrue($existsAddUser);
     }
 
     /**
@@ -66,7 +90,15 @@ class UsersControllerTest extends TestCase
      */
     public function testEdit(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $userName = 'テストユーザー';
+        $user = UserFactory::make()->persist();
+        $data = [
+            'name' => $userName
+        ];
+        $this->patch('/users/edit/' . $user->id, $data);
+        $this->assertRedirect('/users');
+        $editUser = $this->Users->get($user->id);
+        $this->assertEquals($userName, $editUser->name);
     }
 
     /**
@@ -77,6 +109,10 @@ class UsersControllerTest extends TestCase
      */
     public function testDelete(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $user = UserFactory::make([])->persist();
+        $this->delete('/users/delete/'. $user->id);
+        $this->assertRedirect('/users');
+        $exitsDeleteUser = $this->Users->exists(['id' => $user->id]);
+        $this->assertFalse($exitsDeleteUser);
     }
 }

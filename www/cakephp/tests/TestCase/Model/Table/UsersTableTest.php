@@ -51,14 +51,57 @@ class UsersTableTest extends TestCase
         parent::tearDown();
     }
 
-    /**
-     * Test validationDefault method
-     *
-     * @return void
-     * @uses \App\Model\Table\UsersTable::validationDefault()
-     */
-    public function testValidationDefault(): void
+     /**
+      * Test validationDefault method
+      *
+      * @dataProvider validationDefaultDataProvider
+      * @param   array  $params
+      * @param   bool   $hasError
+      * @param   array  $errors
+      * @return void
+      * @uses \App\Model\Table\UsersTable::validationDefault()
+      */
+    public function testValidationDefault(array $params, bool $hasError, array $errors): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $entity = $this->Users->newEntity($params);
+        $this->assertEquals($hasError, $entity->hasErrors());
+        $this->assertEquals($errors['name'], $entity->getError('name'));
+    }
+
+    /**
+     * @dataProvider validationDefaultDataProvider
+     *
+     * @return array
+     */
+    public function validationDefaultDataProvider(): array
+    {
+        return [
+            'success' => [
+                ['name' => 'ユーザー名'],
+                false,
+                ['name' => []],
+            ],
+            '最大文字数を超える' => [
+                ['name' => str_repeat('a', 256)],
+                true,
+                ['name' => [
+                    'maxLength' => '最大文字数は255文字です'
+                ]]
+            ],
+            'フィールドが存在しない' => [
+                [],
+                true,
+                ['name' => [
+                    '_required' => 'このフィールドは必須です'
+                ]]
+            ],
+            '空文字が入る' => [
+                ['name' => ''],
+                true,
+                ['name' => [
+                    '_empty' => 'このフィールドを空にすることはできません'
+                ]]
+            ],
+        ];
     }
 }

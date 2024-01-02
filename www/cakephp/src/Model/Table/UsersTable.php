@@ -56,7 +56,7 @@ class UsersTable extends Table
     {
         $validator
             ->scalar('name')
-            ->maxLength('name', 255)
+            ->maxLength('name', 255, "最大文字数は255文字です")
             ->requirePresence('name', 'create')
             ->notEmptyString('name');
 
